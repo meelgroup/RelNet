@@ -1,0 +1,10 @@
+c "c" lines are comments
+c problem type
+p g
+c terminal nodes
+T 1 4
+c edges and corresponding "up" probabilities
+e 1 2 0.5
+e 1 3 0.625
+e 2 4 0.5
+e 3 4 0.5

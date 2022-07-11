@@ -20,16 +20,23 @@ def weighted2unweighted(g: Graph) -> Graph:
     """
     vertex_counter = g.n
     E_new = []
+    P_new = []
 
     for i in range(g.m):
-        if g.P[i] > 0:
+        if g.P[i] > 0: # down probability greater than zero
             b = float2bin(1 - g.P[i])
-            head, tail = g.E[i]
-            e_new, vertex_counter = _weighted_edge(b, head, tail, vertex_counter)
-            E_new.extend(e_new)
+        elif g.P[i] == 0: # down probability equals zero
+            b = [1]
+        head, tail = g.E[i]
+        e_new, vertex_counter = _weighted_edge(b, head, tail, vertex_counter)
+        if g.P[i] > 0: # down probability greater than zero
+            P_new.extend([0.5] * len(e_new))
+        elif g.P[i] == 0: # down probability equals zero
+            P_new.extend([1.0] * len(e_new))
+        E_new.extend(e_new)
 
     V_new = list(range(vertex_counter))
-    P_new = [0.5] * len(E_new)
+    # P_new = [0.5] * len(E_new)
     ug = Graph(V_new, g.K, E_new, P_new)
 
     return ug

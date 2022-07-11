@@ -22,7 +22,7 @@ def weighted2unweighted(g: Graph) -> Graph:
     E_new = []
 
     for i in range(g.m):
-        if 1 - g.P[i] > 0:
+        if g.P[i] > 0:
             b = float2bin(1 - g.P[i])
             head, tail = g.E[i]
             e_new, vertex_counter = _weighted_edge(b, head, tail, vertex_counter)
